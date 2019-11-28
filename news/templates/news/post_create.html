@@ -1,0 +1,15 @@
+{% extends 'news/base_news.html' %}
+
+{% block title %}
+    Post Create - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'post_create_url' %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            {%include 'news/includes/form_template.html'%}
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Create Post</button>
+    </form>
+{% endblock %}

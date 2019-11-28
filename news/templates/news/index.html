@@ -1,0 +1,12 @@
+{% extends 'news/base_blog.html' %}
+
+{% block title %}
+    News Page
+{% endblock %}
+
+{% block content %}
+    <h1>Posts:</h1>
+    {% for post in page_object.object_list %}
+        {%include 'news/includes/post_card_template.html'%}
+    {% endfor %}
+{%endblock%}
