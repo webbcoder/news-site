@@ -17,6 +17,7 @@ class ObjectDetailMixin:
 class ObjectCreateMixin:
     model_form = None
     template = None
+    model = None
 
     def get(self, request):
         form = self.model_form()

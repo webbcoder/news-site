@@ -47,6 +47,10 @@ class PostCreate(LoginRequiredMixin, ObjectCreateMixin, View):
     model_form = PostForm
     template = 'news/post_create.html'
     raise_exception = True
+    post = Post(is_moderation=False)
+    post.save()
+
+
 
 
 class PostUpdate(LoginRequiredMixin, ObjectUpdateMixin, View):
