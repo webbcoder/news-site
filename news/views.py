@@ -15,8 +15,10 @@ def posts_list(request):
     search_query = request.GET.get('search', '')
     if search_query:
         posts = Post.objects.filter(Q(title__icontains=search_query) | Q(body__icontains=search_query))
+        posts = Post.objects.filter(Q(title__icontains=search_query) | Q(body__icontains=search_query) | Q(is_moderation=True))
     else:
         posts = Post.objects.all()
+        posts = Post.objects.filter(is_moderation=True)
     paginator = Paginator(posts, 2)
     page_number = request.GET.get('page', 1)
     page = paginator.get_page(page_number)
@@ -47,8 +49,8 @@ class PostCreate(LoginRequiredMixin, ObjectCreateMixin, View):
     model_form = PostForm
     template = 'news/post_create.html'
     raise_exception = True
-    post = Post(is_moderation=False)
-    post.save()
+    # post = Post(is_moderation=False)
+    # post.save()
 
 
 
