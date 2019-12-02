@@ -1,13 +1,24 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 from django.shortcuts import reverse
 from django.utils.text import slugify
 from time import time
 
 # Create your models here.
 
+
 def gen_slug(s):
     new_slug = slugify(s, allow_unicode=True)
     return new_slug + '-' + str(int(time()))
+
+
+class AdvUser(AbstractUser):
+    is_active = models.BooleanField(default=True, db_index=True, verbose_name='Is activated?')
+    send_messages = models.BooleanField(default=True, verbose_name='Send notifications about new comments?')
+
+    class Meta(AbstractUser.Meta):
+        swappable = 'AUTH_USER_MODEL'
+        pass
 
 
 class Post(models.Model):
