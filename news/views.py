@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import View
+from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -10,6 +11,10 @@ from .forms import TagForm, PostForm
 
 
 # Create your views here.
+
+class SiteLoginView(LoginView):
+    template_name = 'news/login.html'
+
 
 def posts_list(request):
     search_query = request.GET.get('search', '')
