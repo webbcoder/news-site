@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.views.generic import View
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import Post, Tag
@@ -14,6 +15,11 @@ from .forms import TagForm, PostForm
 
 class SiteLoginView(LoginView):
     template_name = 'news/login.html'
+
+
+@login_required
+def profile(request):
+    return render(request, 'news/profile.html')
 
 
 def posts_list(request):
