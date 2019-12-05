@@ -18,7 +18,6 @@ class AdvUser(AbstractUser):
 
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'
-        pass
 
 
 class Post(models.Model):

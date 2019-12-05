@@ -122,3 +122,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 AUTH_USER_MODEL = 'news.AdvUser'
+LOGIN_REDIRECT_URL = '/news/accounts/profile/'
