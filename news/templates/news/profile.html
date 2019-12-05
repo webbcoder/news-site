@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %} User profile {% endblock %}
+{% block content %}
+<h2>{{ user.usernarne }} User profile</h2>
+{% if user.first_name and user.last_name %}
+<p>Hello, {{ user.first_name }} {{ user.last_name}}!</p>
+{% else %}
+<p>Hello!</p>
+{% endif %}
+<h3>Your posts:</h3>
+{% endblock %}

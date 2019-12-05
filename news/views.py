@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import View
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -15,6 +15,10 @@ from .forms import TagForm, PostForm
 
 class SiteLoginView(LoginView):
     template_name = 'news/login.html'
+
+
+class SiteLogoutView(LoginRequiredMixin, LogoutView):
+    template_name = 'news/logout.html'
 
 
 @login_required
