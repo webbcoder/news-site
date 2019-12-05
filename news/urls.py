@@ -6,6 +6,7 @@ urlpatterns = [
     path('accounts/logout/', SiteLogoutView.as_view(), name='logout'),
     path('accounts/profile/', profile, name='profile'),
     path('accounts/profile/change/', ChangeUserInfoView.as_view(), name='profile_change'),
+    path('accounts/password/change/', SitePasswordChangeView.as_view(), name='password_change'),
     path('', posts_list, name='posts_list_url'),
     path('post/create/', PostCreate.as_view(), name='post_create_url'),
     path('post/<str:slug>/', PostDetail.as_view(), name='post_detail_url'),

@@ -1,4 +1,5 @@
 from django.views.generic import UpdateView
+from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
@@ -28,12 +29,12 @@ def profile(request):
     return render(request, 'news/profile.html')
 
 
-class ChangeUserInfoView(SuccessMessageMixin, LoginRequiredMixin, UpdateView) :
+class ChangeUserInfoView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = AdvUser
     template_name = 'news/change_user_info.html'
     form_class = ChangeUserInfoForm
     success_url = reverse_lazy('news:profile')
-    success_message = 'личные данные пользователя изменены'
+    success_message = 'Personal data of user was changed'
 
     def dispatch(self, request, *args, **kwargs):
         self.user_id = request.user.pk
@@ -43,6 +44,12 @@ class ChangeUserInfoView(SuccessMessageMixin, LoginRequiredMixin, UpdateView) :
         if not queryset:
             queryset = self.get_queryset()
         return get_object_or_404(queryset, pk=self.user_id)
+
+
+class SitePasswordChangeView(SuccessMessageMixin, LoginRequiredMixin, PasswordChangeView):
+    template_name = 'news/password_change.html'
+    success_url = reverse_lazy('news:profile')
+    success_message = 'Password of user was changed'
 
 
 def posts_list(request):
@@ -85,8 +92,6 @@ class PostCreate(LoginRequiredMixin, ObjectCreateMixin, View):
     raise_exception = True
     # post = Post(is_moderation=False)
     # post.save()
-
-
 
 
 class PostUpdate(LoginRequiredMixin, ObjectUpdateMixin, View):
