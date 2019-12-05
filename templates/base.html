@@ -32,10 +32,11 @@
                     href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">Profile</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item"
-                        href="#">My posts</a>
+                        <a class="dropdown-item" href="{% url 'profile_change' %}">Account</a>
                         <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">My posts</a>
                         <a class="dropdown-item" href="#">Delete</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                     </div>
                 </li>

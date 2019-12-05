@@ -1,14 +1,16 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.views.generic import UpdateView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
 from django.views.generic import View
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
-from .models import Post, Tag
+from .models import AdvUser, Post, Tag
 from .utils import *
-from .forms import TagForm, PostForm
+from .forms import ChangeUserInfoForm, TagForm, PostForm
 
 
 # Create your views here.
@@ -24,6 +26,23 @@ class SiteLogoutView(LoginRequiredMixin, LogoutView):
 @login_required
 def profile(request):
     return render(request, 'news/profile.html')
+
+
+class ChangeUserInfoView(SuccessMessageMixin, LoginRequiredMixin, UpdateView) :
+    model = AdvUser
+    template_name = 'news/change_user_info.html'
+    form_class = ChangeUserInfoForm
+    success_url = reverse_lazy('news:profile')
+    success_message = 'личные данные пользователя изменены'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.user_id = request.user.pk
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        if not queryset:
+            queryset = self.get_queryset()
+        return get_object_or_404(queryset, pk=self.user_id)
 
 
 def posts_list(request):
