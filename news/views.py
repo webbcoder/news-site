@@ -3,7 +3,8 @@ from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
-from django.views.generic import View
+from django.views.generic import View, CreateView
+from django.views.generic.base import TemplateView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -11,7 +12,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import AdvUser, Post, Tag
 from .utils import *
-from .forms import ChangeUserInfoForm, TagForm, PostForm
+from .forms import RegisterUserForm, ChangeUserInfoForm, TagForm, PostForm
 
 
 # Create your views here.
@@ -50,6 +51,17 @@ class SitePasswordChangeView(SuccessMessageMixin, LoginRequiredMixin, PasswordCh
     template_name = 'news/password_change.html'
     success_url = reverse_lazy('news:profile')
     success_message = 'Password of user was changed'
+
+
+class RegisterUserView(CreateView):
+    model = AdvUser
+    template_name = 'news/register_user.html'
+    form_class = RegisterUserForm
+    success_url = reverse_lazy('news:register_done')
+
+
+class RegisterDoneView(TemplateView):
+    template_name = 'news/register_done.html'
 
 
 def posts_list(request):

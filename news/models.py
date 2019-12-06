@@ -3,9 +3,18 @@ from django.contrib.auth.models import AbstractUser
 from django.shortcuts import reverse
 from django.utils.text import slugify
 from time import time
-
+from django.dispatch import Signal
+from .utils import send_activation_notification
 # Create your models here.
 
+user_registrated = Signal(providing_args=['instance'])
+
+
+def user_registrated_dispatcher(sender, **kwargs):
+    send_activation_notification(kwargs['instance'])
+
+
+user_registrated.connect(user_registrated_dispatcher)
 
 def gen_slug(s):
     new_slug = slugify(s, allow_unicode=True)

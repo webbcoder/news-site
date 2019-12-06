@@ -1,0 +1,6 @@
+Dear user {{ user.username }}
+
+You are registered on the site
+To complete the activation you need to follow the link:
+
+{{ host }}{% url 'register_activate' sign=sign %}
