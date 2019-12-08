@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from .local_email_settings import *
 try:
     from .local_settings import *
 except ImportError:
@@ -124,3 +125,5 @@ STATICFILES_DIRS = [
 AUTH_USER_MODEL = 'news.AdvUser'
 LOGIN_URL = '/news/accounts/login/'
 LOGIN_REDIRECT_URL = '/news/accounts/profile/'
+
+

@@ -16,13 +16,14 @@ def user_registrated_dispatcher(sender, **kwargs):
 
 user_registrated.connect(user_registrated_dispatcher)
 
+
 def gen_slug(s):
     new_slug = slugify(s, allow_unicode=True)
     return new_slug + '-' + str(int(time()))
 
 
 class AdvUser(AbstractUser):
-    is_active = models.BooleanField(default=True, db_index=True, verbose_name='Is activated?')
+    is_activated = models.BooleanField(default=True, db_index=True, verbose_name='Is activated?')
     send_messages = models.BooleanField(default=True, verbose_name='Send notifications about new comments?')
 
     class Meta(AbstractUser.Meta):

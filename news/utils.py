@@ -6,9 +6,11 @@ from news_site.settings import ALLOWED_HOSTS
 
 signer = Signer()
 
+
 def send_activation_notification(user):
     if ALLOWED_HOSTS:
-        host = 'http://' + ALLOWED_HOSTS[0]
+        # host = 'http://' + ALLOWED_HOSTS[0]
+        host = 'http://0.0.0.0:8000'
     else:
         host = 'http://0.0.0.0:8000'
     context = {'user': user,
@@ -17,6 +19,7 @@ def send_activation_notification(user):
     subject = render_to_string('email/activation_letter_subject.txt', context)
     body_text = render_to_string('email/activation_letter_body.txt', context)
     user.email_user(subject, body_text)
+
 
 class ObjectDetailMixin:
     model = None

@@ -21,5 +21,5 @@ from .views import redirect_blog
 urlpatterns = [
     path('', redirect_blog),
     path('admin/', admin.site.urls),
-    path('news/', include('news.urls'))
+    path('news/', include('news.urls', namespace='news'))
 ]

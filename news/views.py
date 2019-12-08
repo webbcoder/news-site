@@ -13,6 +13,7 @@ from django.db.models import Q
 from .models import AdvUser, Post, Tag
 from .utils import *
 from .forms import RegisterUserForm, ChangeUserInfoForm, TagForm, PostForm
+from django.core.signing import BadSignature
 
 
 # Create your views here.
@@ -62,6 +63,22 @@ class RegisterUserView(CreateView):
 
 class RegisterDoneView(TemplateView):
     template_name = 'news/register_done.html'
+
+
+def user_activate(request, sign):
+    try:
+        username = signer.unsign(sign)
+    except BadSignature:
+        return render(request, 'news/bad_signature.html')
+    user = get_object_or_404(AdvUser, username=username)
+    if user.is_activated:
+        template = 'news/user_is_activated.html'
+    else:
+        template = 'news/activation_done.html'
+        user.is_active = True
+        user.is_activated = True
+        user. save()
+    return render(request, template)
 
 
 def posts_list(request):

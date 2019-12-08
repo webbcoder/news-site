@@ -5,8 +5,8 @@
         Create
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="{% url 'post_create_url' %}">Post</a>
-        <a class="dropdown-item" href="{% url 'tag_create_url' %}">Tag</a>
+        <a class="dropdown-item" href="{% url 'news:post_create_url' %}">Post</a>
+        <a class="dropdown-item" href="{% url 'news:tag_create_url' %}">Tag</a>
       </div>
     </div>
     <a href="{{ admin_object.get_update_url }}" class="btn btn-light update" style="{% if detail %}display:block;{% endif %}">Update</a>

@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Activation error{% endblock %}
+{% block content %}
+    <h2>Activation</h2>
+    <p>Activation was failed</p>
+    <p><a href="{% url 'news:login' %}">Reactivation</a></p>
+{% endblock %}
