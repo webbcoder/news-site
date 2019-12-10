@@ -5,6 +5,7 @@ from django.utils.text import slugify
 from time import time
 from django.dispatch import Signal
 from .utils import send_activation_notification
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 user_registrated = Signal(providing_args=['instance'])
@@ -33,7 +34,7 @@ class AdvUser(AbstractUser):
 class Post(models.Model):
     title = models.CharField(max_length=150, db_index=True)
     slug = models.SlugField(max_length=150, blank=True, unique=True)
-    body = models.TextField(blank=True, db_index=True)
+    body = RichTextField(blank=True, null=True, db_index=True)
     tags = models.ManyToManyField('Tag', blank=True, related_name='posts')
     date_pub = models.DateTimeField(auto_now_add=True)
     is_moderation = models.NullBooleanField(default=False)

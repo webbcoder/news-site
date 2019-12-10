@@ -10,6 +10,7 @@
         {% for field in form %}
             {%include 'news/includes/form_template.html'%}
         {% endfor %}
+        {{ form.media }}
         <button type="submit" class="btn btn-primary">Create Post</button>
     </form>
 {% endblock %}

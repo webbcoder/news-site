@@ -4,5 +4,5 @@
 {%endblock%}
 {%block content%}
     <h1 class="mt-5">{{post.title}}</h1>
-    <p>{{post.body}}</p>
+    <p>{{post.body | safe}}</p>
 {%endblock%}

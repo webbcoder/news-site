@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
+    'django_wysiwyg',
+    'ckeditor',
     'news'
 ]
 
@@ -125,5 +127,6 @@ STATICFILES_DIRS = [
 AUTH_USER_MODEL = 'news.AdvUser'
 LOGIN_URL = '/news/accounts/login/'
 LOGIN_REDIRECT_URL = '/news/accounts/profile/'
+DJANGO_WYSIWYG_FLAVOR = "ckeditor"
 
 
