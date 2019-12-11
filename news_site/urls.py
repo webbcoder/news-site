@@ -15,11 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
 from django.urls import include
 from .views import redirect_blog
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', redirect_blog),
     path('admin/', admin.site.urls),
     path('news/', include('news.urls', namespace='news'))
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
