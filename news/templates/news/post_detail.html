@@ -1,8 +1,10 @@
 {%extends 'news/base_news.html'%}
+{% load thumbnail %}
 {%block title%}
     {{post.title}}-{{block.super}}
 {%endblock%}
 {%block content%}
+{#    <img src="{{post.image.value.url }}" width="100" height="100">#}
     <h1 class="mt-5">{{post.title}}</h1>
     <p>{{post.body | safe}}</p>
 {%endblock%}

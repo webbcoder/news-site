@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_wysiwyg',
     'ckeditor',
-    'news'
+    'news',
+    'django_cleanup',
+    'easy_thumbnails'
 ]
 
 MIDDLEWARE = [
@@ -126,7 +128,7 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-THUMBNALL_ALIASES = {
+THUMBNAIL_ALIASES = {
     '': {
         'default': {
             'size': (96, 96),
@@ -134,7 +136,7 @@ THUMBNALL_ALIASES = {
         },
     },
 }
-THUMBNALL_BASEDIR = 'thumbnails'
+THUMBNAIL_BASEDIR = 'thumbnails'
 AUTH_USER_MODEL = 'news.AdvUser'
 LOGIN_URL = '/news/accounts/login/'
 LOGIN_REDIRECT_URL = '/news/accounts/profile/'
