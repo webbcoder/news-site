@@ -1,8 +1,12 @@
+{% load thumbnail %}
 <div class="card mb-4">
   <div class="card-header">
     {{post.date_pub}}
   </div>
   <div class="card-body">
+    {% if post.image %}
+        <img class="mr-3" src="{% thumbnail post.image 'default' %}" alt="">
+    {% endif %}
     <h5 class="card-title">{{post.title}}</h5>
     <p class="card-text">{{post.body|truncatewords:15 | safe}}.</p>
     <a href="{{post.get_absolute_url}}" class="btn btn-light">Read</a>
