@@ -8,6 +8,7 @@
 <p>Hello!</p>
 {% endif %}
     <p><a href="{% url 'news:post_create_url' %}">Add post</a></p>
+    <p><a href="{% url 'news:tag_create_url' %}">Add slug</a></p>
 {% if posts %}
     <h3>Your posts:</h3>
     <ul class="list-unstyled">

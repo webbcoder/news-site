@@ -33,10 +33,8 @@ class ObjectDetailMixin:
 
     def get(self, request, slug):
         obj = get_object_or_404(self.model, slug__iexact=slug)
-        ais = obj.additionalimage_set.all()
         return render(request, self.template, context={self.model.__name__.lower(): obj,
                                                        'admin_object': obj,
-                                                       'ais': ais,
                                                        'detail': True
                                                        })
 
