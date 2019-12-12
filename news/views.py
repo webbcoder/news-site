@@ -31,7 +31,9 @@ class SiteLogoutView(LoginRequiredMixin, LogoutView):
 
 @login_required
 def profile(request):
-    return render(request, 'news/profile.html')
+    posts = Post.objects.filter(author=request.user.pk)
+    context = {'posts': posts}
+    return render(request, 'news/profile.html', context)
 
 
 class ChangeUserInfoView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):

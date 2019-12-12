@@ -7,5 +7,13 @@
 {% else %}
 <p>Hello!</p>
 {% endif %}
-<h3>Your posts:</h3>
+    <p><a href="{% url 'news:post_create_url' %}">Add post</a></p>
+{% if posts %}
+    <h3>Your posts:</h3>
+    <ul class="list-unstyled">
+    {% for post in posts %}
+        {%include 'news/includes/post_card_template.html'%}
+    {% endfor %}
+</ul>
+{% endif %}
 {% endblock %}

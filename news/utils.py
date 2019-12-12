@@ -33,8 +33,10 @@ class ObjectDetailMixin:
 
     def get(self, request, slug):
         obj = get_object_or_404(self.model, slug__iexact=slug)
+        ais = obj.additionalimage_set.all()
         return render(request, self.template, context={self.model.__name__.lower(): obj,
                                                        'admin_object': obj,
+                                                       'ais': ais,
                                                        'detail': True
                                                        })
 
@@ -49,7 +51,7 @@ class ObjectCreateMixin:
         return render(request, self.template, context={'form': form})
 
     def post(self, request):
-        bound_form = self.model_form(request.POST)
+        bound_form = self.model_form(request.POST, request.FILES)
         if bound_form.is_valid():
             new_tag = bound_form.save()
             return redirect(new_tag)
@@ -68,7 +70,7 @@ class ObjectUpdateMixin:
 
     def post(self, request, slug):
         obj = self.model.objects.get(slug__exact=slug)
-        bound_form = self.model_form(request.POST, instance=obj)
+        bound_form = self.model_form(request.POST, request.FILES, instance=obj)
         if bound_form.is_valid():
             new_obj = bound_form.save()
             return redirect(new_obj)
